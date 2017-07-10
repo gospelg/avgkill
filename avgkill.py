@@ -8,6 +8,7 @@ def avgkill():
     subprocess.call('"C:\\Program Files (x86)\\AVG\\AV\\avgmfapx.exe"'
                      ' /Appmode=Setup /uninstall /uilevel=Silent', shell=True)
 
+#pause function. Makes sure script does not moveon until avg is done with its uninstall
 def still_run(process):
     running = subprocess.check_output('tasklist', shell=True)
     if process in running:
@@ -18,7 +19,7 @@ def still_run(process):
         logging.info('avgmfapx.exe is complete, moving to cleanup.')
         cleanup()
         
-
+#deletes a few folders avg leaves behind
 def cleanup():
     try:
         subprocess.call('rd /s /q "C:\\programdata\\AVG"', 
